@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefaultWidthComponent } from './default-width.component';
+import { DefaultLayoutComponent } from './default-layout.component';
 
 describe('DefaultWidthComponent', () => {
-  let component: DefaultWidthComponent;
-  let fixture: ComponentFixture<DefaultWidthComponent>;
+  let component: DefaultLayoutComponent;
+  let fixture: ComponentFixture<DefaultLayoutComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DefaultWidthComponent]
+      declarations: [DefaultLayoutComponent]
     });
-    fixture = TestBed.createComponent(DefaultWidthComponent);
+    fixture = TestBed.createComponent(DefaultLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

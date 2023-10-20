@@ -1,1 +1,25 @@
-<p>header works!</p>
+<app-auto-width>
+    <div class="grid grid-nogutter">
+        <p-menubar [model]="mainMenuItems" class="col-12">
+            <ng-template pTemplate="start">
+                <img src="/assets/img/dehner.png" class="logo" alt="logo" height="40">
+            </ng-template>
+            <ng-template pTemplate="end">
+                <div class="icon-menu justify-content-end align-items-center">
+                    <p-avatar pRipple class="ml-3" icon="pi pi-question-circle" (click)="helpMenu.toggle($event)"></p-avatar>
+                    <ng-container *ngIf="{val: basketCount$ | async} as count">
+                        <div *ngIf="(count.val ?? 0) > 0" style="display: inline-block" pBadge [value]="'' + count.val">
+                            <p-avatar pRipple class="ml-3" icon="pi pi-shopping-cart" [routerLink]="ROUTE_BASKET"></p-avatar>
+                        </div>
+                        <div *ngIf="(count.val || 0) < 1" style="display: inline-block">
+                            <p-avatar pRipple class="ml-3" icon="pi pi-shopping-cart" [routerLink]="ROUTE_BASKET"></p-avatar>
+                        </div>
+                    </ng-container>
+                    <p-avatar pRipple class="ml-3" icon="pi pi-user" (click)="userMenu.toggle($event)"></p-avatar>
+                    <p-menu #helpMenu [popup]="true" [model]="helpMenuItems"></p-menu>
+                    <p-menu #userMenu [popup]="true" [model]="userMenuItems"></p-menu>
+                </div>
+            </ng-template>
+        </p-menubar>
+    </div>
+</app-auto-width>

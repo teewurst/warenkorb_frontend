@@ -1,1 +1,26 @@
-<p>product-card works!</p>
+<p-card>
+    <ng-template pTemplate="header">
+        <div class="flex justify-content-center">
+            <img alt="Card" class="h-10rem w-auto" [src]="product.image"/>
+        </div>
+    </ng-template>
+    <div class="h-7rem">
+        <p class="h-2rem">
+            <strong>{{product.name}}</strong>
+        </p>
+        <p class="description">
+            {{product.description}}
+        </p>
+        <div class="h-3rem pb-2 flex flex-column justify-content-end">
+            <app-price [absoluteDiscount]="product.price * product.percentageDiscount" [additionalDiscount]="0" [percentageDiscount]="product.percentageDiscount" [reducedTotal]="product.price - product.price * product.percentageDiscount" [total]="product.price"></app-price>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <form [formGroup]="addToBasketForm" (ngSubmit)="orderProduct()">
+            <div class="p-inputgroup">
+                <p-dropdown [options]="amountOptions" formControlName="amount" optionLabel="name"></p-dropdown>
+                <p-button type="submit" icon="pi pi-shopping-cart"></p-button>
+            </div>
+        </form>
+    </ng-template>
+</p-card>
