@@ -1,1 +1,40 @@
-<p>bundle works!</p>
+<ng-container *ngIf="myProduct$ | async as product; else loading">
+    <p-divider align="left">
+        <span class="p-tag">Jetzt {{productBundle.absolutDiscount | currency:'EUR'}} sparen im Produktbundle:</span>
+    </p-divider>
+    <div class="grid">
+        <div class="md:col-2 col-12 flex md:justify-content-center md:align-items-center">
+            <img [src]="product.image" alt="" class="max-h-7rem w-auto max-w-full" style="width: 100%">
+        </div>
+        <div class="md:col-5 col-12 flex md:flex-column md:align-items-start md:justify-content-center">
+            <p><strong>{{product.name}}</strong></p>
+            <p>{{product.description}}</p>
+        </div>
+        <ng-container *ngIf="basketService.observable$() | async as basket; else empty">
+            <div class="md:col-3 col-12 flex md:justify-content-center md:align-items-center flex-column">
+                <span class="inline-block mb-2">Jetzt {{productBundle.absolutDiscount | currency:'EUR'}} sparen!</span>
+                <div class="p-inputgroup">
+                    <button type="button" disabled pButton icon="pi pi-trash"></button>
+                    <input type="text" disabled class="w-2rem text-center" pInputText [value]="0"/>
+                    <button type="button" pButton [icon]="'pi pi-plus'"
+                            (click)="basketService.addProduct(product, 1, basket.itemsOrder.indexOf(productBundle.sourceProduct) + 1)"></button>
+                </div>
+            </div>
+        </ng-container>
+        <div class="md:col-2 col-12 flex justify-content-end align-items-center">
+            <app-price
+                    [absoluteDiscount]="product.price * product.percentageDiscount"
+                    [additionalDiscount]="productBundle.absolutDiscount"
+                    [percentageDiscount]="product.percentageDiscount"
+                    [reducedTotal]="product.price - product.price * product.percentageDiscount - productBundle.absolutDiscount"
+                    [total]="product.price">
+            </app-price>
+        </div>
+    </div>
+</ng-container>
+<ng-template #loading>
+    <div class="flex flex-column justify-content-center h-8rem">
+        <p-spinner></p-spinner>
+    </div>
+</ng-template>
+<ng-template #empty></ng-template>

@@ -1,3 +1,34 @@
 <app-default-layout>
-Dies ist der Warenkorb.
+    <div>Dies ist der Warenkorb.</div>
+    <p-divider></p-divider>
+    <div class="grid">
+        <ng-container *ngIf="basketService.observable$() | async as basket; else loading">
+            <ng-container *ngIf="basket.itemsOrder.length < 1">
+                <h4>Das Warenkorb ist leer.</h4>
+            </ng-container>
+            <ng-container *ngIf="basket.itemsOrder.length > 0">
+                <ng-container *ngFor="let productId of basket.itemsOrder">
+                    <app-order-item class="flex-grow-1" [orderItem]="basket.orderItems[productId]"></app-order-item>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+    <div class="flex justify-content-end align-items-center">
+        <ng-container *ngIf="basketService.observable$() | async as basket; else loading">
+            <ng-container  *ngIf="basket.total > 0">
+                <p-divider></p-divider>
+                <p-button label="Jetzt Bestellen" class="mr-4"></p-button>
+                <app-price
+                        [absoluteDiscount]="basket.absolutDiscount"
+                        [additionalDiscount]="0"
+                        [percentageDiscount]="basket.percentageDiscount"
+                        [reducedTotal]="basket.reducedTotal"
+                        [total]="basket.total">
+                </app-price>
+            </ng-container>
+        </ng-container>
+    </div>
+    <ng-template #loading>
+        <p-spinner></p-spinner>
+    </ng-template>
 </app-default-layout>

@@ -5,6 +5,12 @@ export interface ProductBundle {
     absolutDiscount: number;
 }
 
+export let emptyProductBundle: ProductBundle = {
+    sourceProduct: '',
+    targetProduct: '',
+    absolutDiscount: 0,
+}
+
 export let productBundles: ProductBundle[] = [
     {
         sourceProduct: '2222-abcde-2222',

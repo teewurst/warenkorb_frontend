@@ -1,6 +1,12 @@
 <div class="block">
     <app-header></app-header>
 </div>
+<p-confirmPopup #cd>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" label="Zurück" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Ja, entfernen" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmPopup>
 <app-auto-width>
     <ng-content></ng-content>
 </app-auto-width>

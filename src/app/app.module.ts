@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +10,7 @@ import {MenubarModule} from 'primeng/menubar';
 import {RippleModule} from 'primeng/ripple';
 import {AvatarModule} from 'primeng/avatar';
 import {BadgeModule} from 'primeng/badge';
-import {NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage, registerLocaleData} from '@angular/common';
 import {MenuModule} from 'primeng/menu';
 import { PageNotFoundComponent } from './page/page-not-found/page-not-found.component';
 import {ButtonModule} from 'primeng/button';
@@ -26,7 +26,17 @@ import {CardModule} from 'primeng/card';
 import {DropdownModule} from 'primeng/dropdown';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PriceComponent } from './layout/price/price.component';
+import {DividerModule} from 'primeng/divider';
+import {SpinnerModule} from 'primeng/spinner';
+import {ChipsModule} from 'primeng/chips';
+import {StyleClassModule} from 'primeng/styleclass';
+import {ToastModule} from 'primeng/toast';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
+registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 @NgModule({
     declarations: [
         AppComponent,
@@ -57,9 +67,22 @@ import { PriceComponent } from './layout/price/price.component';
         CardModule,
         DropdownModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        DividerModule,
+        SpinnerModule,
+        ChipsModule,
+        StyleClassModule,
+        ToastModule,
+        ConfirmPopupModule
     ],
-    providers: [],
+    providers: [
+        MessageService,
+        ConfirmationService,
+        {
+            provide: LOCALE_ID,
+            useValue: 'de-DE'
+        }
+    ],
     exports: [
         DefaultLayoutComponent
     ],

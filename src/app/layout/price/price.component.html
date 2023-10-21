@@ -1,13 +1,14 @@
 <div class="flex flex-column">
     <div class="flex justify-content-end" *ngIf="absoluteDiscount && percentageDiscount">
         <span class="percentageDiscount">{{ percentageDiscount * 100 * -1 | number: "1.0-0" }}%</span>
-        <span class="ml-1 absoluteDiscount">{{ absoluteDiscount * -1 | currency }}€</span>
+        <span class="ml-1 absoluteDiscount">{{ absoluteDiscount * -1 | currency:'EUR' }}</span>
     </div>
     <div class="flex justify-content-end" *ngIf="additionalDiscount">
-        <span class="percentageDiscount">{{ additionalDiscount * -1 | currency }}€</span>
+        <span class="percentageDiscount">Einmalig {{ additionalDiscount * -1 | currency:'EUR' }}</span>
     </div>
     <div class="flex justify-content-end">
-        <span class="total" [ngClass]="{'strike': reducedTotal < total}">{{ total | currency}}€</span>
-        <span class="ml-1 reducedTotal" *ngIf="reducedTotal < total">{{ reducedTotal | currency}}€</span>
+        <span class="total" [ngClass]="{'strike': reducedTotal < total}">{{ total | currency:'EUR'}}</span>
+        <span class="ml-1 reducedTotal" *ngIf="reducedTotal < total">{{ reducedTotal | currency:'EUR'}}</span>
     </div>
 </div>
+

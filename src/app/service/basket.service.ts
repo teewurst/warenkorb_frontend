@@ -5,6 +5,7 @@ import {Product} from '../model/product.model';
 import {BehaviorSubject, Observable, ReplaySubject, Subject} from 'rxjs';
 import {ProductListService} from './product-list.service';
 import {ProductBundlesService} from './product-bundles.service';
+import {MessageService} from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,10 @@ export class BasketService {
 
   private basket$: BehaviorSubject<Basket> = new BehaviorSubject<Basket>(emptyBasket);
 
-  constructor(private productListService: ProductListService, private productBundleService: ProductBundlesService) {
+  constructor(
+      private productListService: ProductListService,
+      private productBundleService: ProductBundlesService
+  ) {
     productListService.observable$().subscribe((products: {[keys: string]: Product}) => {
       this.products = products;
       // theoretically there has to be a change here, maybe some products are not available anymore
@@ -33,13 +37,14 @@ export class BasketService {
     return this.basket$.asObservable();
   }
 
-  public addProduct(product: Product, amount: number): void {
+  public addProduct(product: Product, amount: number, index: number | null = null): void {
       if (typeof this.basket.orderItems[product.uid] == 'undefined') {
         this.basket.orderItems[product.uid] = {
           amount: amount,
           additionalAbsoluteDiscount: 0,
           productId: product.uid,
         };
+        this.basket.itemsOrder.splice(index ?? this.basket.itemsOrder.length, 0, product.uid);
       } else {
         this.basket.orderItems[product.uid].amount += amount;
       }
@@ -55,6 +60,7 @@ export class BasketService {
     if (this.basket.orderItems[product.uid].amount < 1) {
       // maybe it would be better to not instantly delete a basket entry
       delete this.basket.orderItems[product.uid];
+      this.basket.itemsOrder = this.basket.itemsOrder.filter((productId: string) => productId !== product.uid);
     }
 
     this.recalculateBasket();
