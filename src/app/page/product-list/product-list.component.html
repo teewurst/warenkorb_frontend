@@ -4,7 +4,7 @@
     <div class="grid surface-section text-800">
         <ng-container *ngIf="productList$ | async as productList">
             <ng-container *ngFor="let product of Object.values(productList)">
-                <app-product-card [product]="product"  class="lg:col-3 md:col-4 sm:col-6"></app-product-card>
+                <app-product-card [product]="product"  class=" col-12 lg:col-3 md:col-4 sm:col-6"></app-product-card>
             </ng-container>
         </ng-container>
 
