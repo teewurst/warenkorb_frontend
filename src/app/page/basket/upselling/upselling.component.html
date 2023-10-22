@@ -1,1 +1,8 @@
-<p>upselling works!</p>
+<div class="grid surface-section text-800">
+    <ng-container *ngFor="let product of upsellingProducts">
+        <app-product-card [product]="product"  class="lg:col-3 md:col-4 sm:col-6"></app-product-card>
+    </ng-container>
+</div>
+<div class="flex justify-content-end">
+    <p-button label="Jetzt Bestellen" class="mr-4" (click)="ref.close('order')"></p-button>
+</div>

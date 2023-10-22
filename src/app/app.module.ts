@@ -35,6 +35,7 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {DialogService} from 'primeng/dynamicdialog';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 @NgModule({
@@ -78,6 +79,7 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     providers: [
         MessageService,
         ConfirmationService,
+        DialogService,
         {
             provide: LOCALE_ID,
             useValue: 'de-DE'

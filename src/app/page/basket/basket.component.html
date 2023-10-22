@@ -16,8 +16,7 @@
     <div class="flex justify-content-end align-items-center">
         <ng-container *ngIf="basketService.observable$() | async as basket; else loading">
             <ng-container  *ngIf="basket.total > 0">
-                <p-divider></p-divider>
-                <p-button label="Jetzt Bestellen" class="mr-4"></p-button>
+                <p-button label="Jetzt Bestellen" class="mr-4" (click)="order(basket)"></p-button>
                 <app-price
                         [absoluteDiscount]="basket.absolutDiscount"
                         [additionalDiscount]="0"
