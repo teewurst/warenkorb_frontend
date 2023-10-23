@@ -8,17 +8,17 @@ Angular ist in Componenten aufgeteilt, welche sich in einer Baumstruktur anordne
 
 Direkt unter der App Route stehen also die Page Components (sichtbar in `src/app/page`). In der `src/app/app-routing.module.ts` lassen sich die HTML Routes zu den verschiedenen Page Components finden.
 
-Die Page Components haben als Route Node immer eine Layout Component. (In diesem Projekt nur `src/app/layout/default-layout`; Sinnvoll wäre für verschiedene Pages reduzierte Menüs abzubilden) Innerhalb dieser finden sich die individuellen Logiken der Pages wieder.
+Die Page Components haben als Route Node immer eine Layout Component. (In diesem Projekt nur `src/app/layout/default-layout/default-layout.component.html`; Sinnvoll wäre für verschiedene Pages reduzierte Menüs abzubilden) Innerhalb dieser finden sich die individuellen Logiken der Pages wieder.
 
 In diesem Projekt wurden drei Pages angelegt. Die Products Page, die Basket Page und die Not Found Page.
 
 ## Page Components
 
-### src/app/page/product-list Component
+### `src/app/page/product-list/product-list.component.html` Component
 
-Diese Component stellt eine Liste an Produkten zur Verfügung (Bilder, Name, Beschreibung, Preis, Rabatte). Diese arbeitet eng mit der `src/app/page/product-list/product-card` Component zusammen und bilden zusammen List und Item. So kann über die Product Card entsprechend Products in den Warenkorb gelegt werden.
+Diese Component stellt eine Liste an Produkten zur Verfügung (Bilder, Name, Beschreibung, Preis, Rabatte). Diese arbeitet eng mit der `src/app/page/product-list/product-card/product-card.component.html` Component zusammen und bilden zusammen List und Item. So kann über die Product Card entsprechend Products in den Warenkorb gelegt werden.
 
-### src/app/page/basket Component
+### `src/app/page/basket/basket.component.html` Component
 
 Diese Component bildet den eigentlichen Warenkorb ab. Alle hinzugefügten Produkte bilden eine Liste. Außerdem gibt es im Hintergrund "Bundles", welche Produkte verknüpfen um eine Upselling zu ermöglichen. Die Warenkorb Component stellt auch die Preise dar, inklusive aller Rabatte (Direkte Discounts und Bundle Discounts) entsprechend dar. Die Berechnung erfolgt jedoch in einem Service.
 
@@ -34,7 +34,7 @@ In unseren Fall sind drei Services Relevant. Zwei Mocks:
 
 Und...
 
-### Der Basket Service (src/app/service/basket.service.ts)
+### Der Basket Service (`src/app/service/basket.service.ts`)
 
 Der Basket Service ist das "komplizierteste" in diesen Projekt. Er hat drei Grundlegende Aufgaben:
 
